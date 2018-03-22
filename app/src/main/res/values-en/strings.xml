@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">MoneyTracker</string>
     <string name="hello_world">Hello, world!</string>
+    <string name="add_item_toolbar_title">New record</string>
+    <string name="rub_symbol">₽</string>
+    <string name="add_item_title_hint">Title</string>
+    <string name="add_item_price_hint">0</string>
 </resources>
