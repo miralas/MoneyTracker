@@ -51,8 +51,8 @@
             android:id="@+id/add_btn"
             android:layout_marginLeft="22dp"
             android:background="@drawable/ic_add"
-            android:layout_width="26dp"
-            android:layout_height="26dp" />
+            android:layout_width="@dimen/item_add_btn_size"
+            android:layout_height="@dimen/item_add_btn_size" />
 
     </LinearLayout>
 
