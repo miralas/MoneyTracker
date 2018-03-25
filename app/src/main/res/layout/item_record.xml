@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@color/titleColorOnList"
-        android:padding="18dp"
+        android:padding="@dimen/item_padding"
         android:textColor="@color/white"
         tools:text="Молоко" />
 
@@ -25,7 +25,7 @@
         android:layout_height="match_parent"
         android:background="@color/priceColorOnList"
         android:gravity="center"
-        android:padding="18dp"
+        android:padding="@dimen/item_padding"
         android:textColor="@color/white"
         tools:text="55P " />
 </LinearLayout>

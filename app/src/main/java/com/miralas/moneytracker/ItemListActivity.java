@@ -5,8 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,7 +82,8 @@ public class ItemListActivity extends AppCompatActivity {
 
         public void applyData(Item item) {
             title.setText(item.getTitle());
-            price.setText(String.valueOf(item.getPrice()));
+            // Add ruble symbol with String.format
+            price.setText(String.format("%1s%2s", String.valueOf(item.getPrice()), getString(R.string.rub_symbol)));
         }
     }
 }
