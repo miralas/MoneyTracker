@@ -23,6 +23,7 @@ public class ItemListActivity extends AppCompatActivity {
     private List<Item> data = new ArrayList<>();
     private ItemListAdapter adapter;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,9 +31,18 @@ public class ItemListActivity extends AppCompatActivity {
         createData();
         view = findViewById(R.id.list);
         view.setLayoutManager(new LinearLayoutManager(this));
+        //Add Item Decoration
+        view.addItemDecoration(new ItemDecorator(
+                convertToInt(R.integer.item_margin_left), convertToInt(R.integer.item_margin_top),
+                convertToInt(R.integer.item_margin_right), convertToInt(R.integer.item_margin_bottom)));
+
         adapter = new ItemListAdapter();
         view.setAdapter(adapter);
 //        adapter.notifyDataSetChanged();
+    }
+
+    private int convertToInt(int test) {
+        return getResources().getInteger(test);
     }
 
     private void createData() {
@@ -83,7 +93,7 @@ public class ItemListActivity extends AppCompatActivity {
         public void applyData(Item item) {
             title.setText(item.getTitle());
             // Add ruble symbol with String.format
-            price.setText(String.format("%1s%2s", String.valueOf(item.getPrice()), getString(R.string.rub_symbol)));
+            price.setText(String.format(getString(R.string.item_list_price_formatter), String.valueOf(item.getPrice())));
         }
     }
 }

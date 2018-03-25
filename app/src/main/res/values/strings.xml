@@ -5,5 +5,6 @@
     <string name="rub_symbol">₽</string>
     <string name="add_item_title_hint">Название</string>
     <string name="add_item_price_hint">0</string>
+    <string name="item_list_price_formatter">%s ₽</string>
     <string name="activity_item_list_title">Учет бюджета</string>
 </resources>

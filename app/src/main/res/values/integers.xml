@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="item_margin_top">5</integer>
+    <integer name="item_margin_left">10</integer>
+    <integer name="item_margin_bottom">5</integer>
+    <integer name="item_margin_right">10</integer>
+</resources>
