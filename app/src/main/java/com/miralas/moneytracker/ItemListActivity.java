@@ -23,7 +23,6 @@ public class ItemListActivity extends AppCompatActivity {
     private List<Item> data = new ArrayList<>();
     private ItemListAdapter adapter;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +32,8 @@ public class ItemListActivity extends AppCompatActivity {
         view.setLayoutManager(new LinearLayoutManager(this));
         //Add Item Decoration
         view.addItemDecoration(new ItemDecorator(
-                convertToInt(R.integer.item_margin_left), convertToInt(R.integer.item_margin_top),
-                convertToInt(R.integer.item_margin_right), convertToInt(R.integer.item_margin_bottom)));
+                (int) getResources().getDimension(R.dimen.item_margin_horizontal),
+                (int) getResources().getDimension(R.dimen.item_margin_vertical)));
 
         adapter = new ItemListAdapter();
         view.setAdapter(adapter);
@@ -92,8 +91,8 @@ public class ItemListActivity extends AppCompatActivity {
 
         public void applyData(Item item) {
             title.setText(item.getTitle());
-            // Add ruble symbol with String.format
-            price.setText(String.format(getString(R.string.item_list_price_formatter), String.valueOf(item.getPrice())));
+            // Format string, like in android
+            price.setText(getString(R.string.item_list_price_formatter, item.getPrice()));
         }
     }
 }

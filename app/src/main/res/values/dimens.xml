@@ -3,4 +3,6 @@
     <dimen name="font_size">20sp</dimen>
     <dimen name="item_add_btn_size">26dp</dimen>
     <dimen name="item_padding">18dp</dimen>
+    <dimen name="item_margin_vertical">6dp</dimen>
+    <dimen name="item_margin_horizontal">8dp</dimen>
 </resources>
