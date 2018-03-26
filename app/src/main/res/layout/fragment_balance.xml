@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/balance_text_view"
+        android:ellipsize="none"
+        android:scrollHorizontally="false"
+        android:layout_marginHorizontal="@dimen/item_margin_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/balance_dummy"
+        tools:text="some text"/>
+
+</android.support.constraint.ConstraintLayout>

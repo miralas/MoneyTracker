@@ -7,4 +7,6 @@
     <color name="white">#FFFFFF</color>
     <color name="titleColorOnList">#fcc31e</color>
     <color name="priceColorOnList">#e67e22</color>
+    <color name="tabIndicator">#ffff00</color>
+    <color name="tabInactiveFontColor">#a6ffffff</color>
 </resources>

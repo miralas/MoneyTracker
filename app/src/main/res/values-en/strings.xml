@@ -6,4 +6,17 @@
     <string name="item_list_price_formatter">%d &#x20bd;</string>
     <string name="add_item_title_hint">Title</string>
     <string name="add_item_price_hint">0</string>
+    <string name="activity_item_list_title">Budget Accounting</string>
+
+    <string name="tab_incomes">Incomes</string>
+    <string name="tab_expenses">Expenses</string>
+    <string name="tab_balance">Balance</string>
+
+    <string-array name="tab_title">
+        <item>@string/tab_expenses</item>
+        <item>@string/tab_incomes</item>
+        <item>@string/tab_balance</item>
+    </string-array>
+
+    <string name="balance_dummy">There will be a fragment of "Balance", and while it is not there, there's nothing to look at.</string>
 </resources>
