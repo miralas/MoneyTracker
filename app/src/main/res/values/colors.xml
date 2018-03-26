@@ -8,5 +8,5 @@
     <color name="titleColorOnList">#fcc31e</color>
     <color name="priceColorOnList">#e67e22</color>
     <color name="tabIndicator">#ffff00</color>
-    <color name="white_65">#a6ffffff</color>
+    <color name="tabInactiveFontColor">#a6ffffff</color>
 </resources>

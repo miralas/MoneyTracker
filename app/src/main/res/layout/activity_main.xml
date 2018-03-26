@@ -8,6 +8,8 @@
     tools:context="com.miralas.moneytracker.MainActivity">
 
     <android.support.design.widget.TabLayout
+        style="@style/AppTabLayout"
+        app:tabTextAppearance="@style/AppTabTextAppearance"
         android:id="@+id/tabLayout"
         android:background="@color/colorPrimary"
         android:layout_width="match_parent"

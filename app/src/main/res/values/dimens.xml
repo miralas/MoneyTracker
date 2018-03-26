@@ -3,6 +3,12 @@
     <dimen name="font_size">20sp</dimen>
     <dimen name="item_add_btn_size">26dp</dimen>
     <dimen name="item_padding">18dp</dimen>
+
+    // For Items Recycler View
     <dimen name="item_margin_vertical">6dp</dimen>
     <dimen name="item_margin_horizontal">8dp</dimen>
+
+    // For tabs
+    <dimen name="tabIndicatorHeight">1dp</dimen>
+    <dimen name="tabFontSize">14sp</dimen>
 </resources>
