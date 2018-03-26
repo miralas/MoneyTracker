@@ -6,4 +6,5 @@
     <string name="item_list_price_formatter">%d &#x20bd;</string>
     <string name="add_item_title_hint">Title</string>
     <string name="add_item_price_hint">0</string>
+    <string name="activity_item_list_title">Учет бюджета</string>
 </resources>
