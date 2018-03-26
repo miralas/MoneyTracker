@@ -14,16 +14,13 @@ import android.view.ViewGroup;
 public class BalanceFragment extends Fragment {
 
     public static BalanceFragment createBalanceFragment() {
-        BalanceFragment fragment = new BalanceFragment();
-
-        return fragment;
+        return new BalanceFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_balance, container, false);
-        view.findViewById(R.id.balance_text_view);
         return view;
     }
 
