@@ -20,6 +20,12 @@ public class ItemDecorator extends RecyclerView.ItemDecoration {
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-        outRect.set(spaceHorizontal,spaceVertical,spaceHorizontal,spaceVertical);
+        if (parent.getChildAdapterPosition(view) == 0) {
+            outRect.set(spaceHorizontal, spaceVertical * 2, spaceHorizontal, spaceVertical);
+        } else if (parent.getChildAdapterPosition(view) == parent.getAdapter().getItemCount() - 1) {
+            outRect.set(spaceHorizontal, spaceVertical, spaceHorizontal, spaceVertical * 2);
+        } else {
+            outRect.set(spaceHorizontal, spaceVertical, spaceHorizontal, spaceVertical);
+        }
     }
 }
