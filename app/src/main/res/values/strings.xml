@@ -17,4 +17,6 @@
         <item>@string/tab_incomes</item>
         <item>@string/tab_balance</item>
     </string-array>
+
+    <string name="balance_dummy">Тут будет фрагмент "Баланс", а пока его нет, смотреть тут не на что.</string>
 </resources>

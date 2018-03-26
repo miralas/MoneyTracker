@@ -31,7 +31,7 @@ public class MainPagesAdapter extends FragmentPagerAdapter {
             case PAGE_EXPENSES:
                 return ItemsFragment.createItemsFragment(ItemsFragment.TYPE_EXPENSES);
             case PAGE_BALANCE:
-                return null;
+                return BalanceFragment.createBalanceFragment();
             default:
                 return null;
         }
@@ -39,7 +39,7 @@ public class MainPagesAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return titles.length;
     }
 
     @Override
