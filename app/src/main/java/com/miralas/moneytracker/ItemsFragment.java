@@ -9,32 +9,36 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 /**
  * Created by tiburon on 23/03/2018.
  */
 
 public class ItemsFragment extends Fragment {
 
-    private static final int TYPE_UNKNOWN = -1;
-    public static final int TYPE_EXPENSES = 1;
-    public static final int TYPE_INCOMES = 2;
-
     private static final String TYPE_KEY = "type";
 
-    public static ItemsFragment createItemsFragment(int type) {
+    public static ItemsFragment createItemsFragment(String type) {
         ItemsFragment fragment = new ItemsFragment();
 
         Bundle bundle = new Bundle();
-        bundle.putInt(ItemsFragment.TYPE_KEY, ItemsFragment.TYPE_INCOMES);
+        bundle.putString(ItemsFragment.TYPE_KEY, type);
 
         fragment.setArguments(bundle);
         return fragment;
     }
 
-    private int type;
+    private String type;
 
     private RecyclerView resycler;
     private ItemsAdapter adapter;
+
+    private Api api;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,11 +46,13 @@ public class ItemsFragment extends Fragment {
 
         adapter = new ItemsAdapter();
         Bundle bundle = getArguments();
-        type = bundle.getInt(TYPE_KEY, TYPE_UNKNOWN);
+        type = bundle.getString(TYPE_KEY, Item.TYPE_EXPENSES);
 
-        if (type == TYPE_UNKNOWN) {
+        if (type.equals(Item.TYPE_UNKNOWN)) {
             throw new IllegalArgumentException("Unknown type");
         }
+
+        api = ((App)getActivity().getApplication()).getApi();
     }
 
     @Nullable
@@ -66,5 +72,24 @@ public class ItemsFragment extends Fragment {
                 (int) getResources().getDimension(R.dimen.item_margin_horizontal),
                 (int) getResources().getDimension(R.dimen.item_margin_vertical)));
         resycler.setAdapter(adapter);
+
+        loadData();
     }
+
+    private void loadData() {
+        Call<List<Item>> call = api.getItems(type);
+
+        call.enqueue(new Callback<List<Item>>() {
+            @Override
+            public void onResponse(Call<List<Item>> call, Response<List<Item>> response) {
+                adapter.setData(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Item>> call, Throwable t) {
+
+            }
+        });
+    }
+
 }
