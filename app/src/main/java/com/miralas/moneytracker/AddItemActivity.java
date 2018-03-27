@@ -11,12 +11,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class AddItemActivity extends AppCompatActivity {
 
     private static final String TAG = "AddItemActivity";
 
     private EditText name, price;
     private Button addBtn;
+
+    private Api api;
 
     // Text watcher for all fields on this activity
     private TextWatcher addItemTextWatcher = new TextWatcher() {
@@ -55,6 +63,9 @@ public class AddItemActivity extends AppCompatActivity {
         name.addTextChangedListener(addItemTextWatcher);
         price.addTextChangedListener(addItemTextWatcher);
 
+        api = ((App)getApplication()).getApi();
+
+
         // Add on click listener to add_btn
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,8 +73,27 @@ public class AddItemActivity extends AppCompatActivity {
 //                String itemName = name.getText().toString();
 //                String itemPrice = price.getText().toString();
                 Log.i(TAG, "onClick: add_btn");
+
+                addItem(new Item("Test", 6700, Item.TYPE_EXPENSES));
             }
         });
 
     }
+
+    private void addItem(Item item) {
+        Call<String> call = api.addItem(item);
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Log.d(TAG, "onResponse: " + response.body());
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+    }
+
 }

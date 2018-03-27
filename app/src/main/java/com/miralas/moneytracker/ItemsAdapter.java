@@ -18,8 +18,13 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
 
     private List<Item> data = new ArrayList<>();
 
-    public ItemsAdapter() {
-        createData();
+//    public ItemsAdapter() {
+//        createData();
+//    }
+
+    public void setData(List<Item> data) {
+        this.data = data;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -39,20 +44,20 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
         return data.size();
     }
 
-    private void createData() {
-        data.add(new Item("Молоко", 55));
-        data.add(new Item("Сыр", 300));
-        data.add(new Item("Хлеб", 50));
-        data.add(new Item("Шоколадка", 120));
-        data.add(new Item("Оплатил счет картой на корпоративе", 15467));
-        data.add(new Item("Автомобиль", 1250000));
-        data.add(new Item("CocaCola", 100));
-        data.add(new Item("", 0));
-        data.add(new Item("Холодильник", 32467));
-        data.add(new Item("Печенюшки", 100));
-        data.add(new Item("Новый SSD", 12000));
-        data.add(new Item("Уже не помню что тогда покупал", 5858));
-    }
+//    private void createData() {
+//        data.add(new Item("Молоко", 55));
+//        data.add(new Item("Сыр", 300));
+//        data.add(new Item("Хлеб", 50));
+//        data.add(new Item("Шоколадка", 120));
+//        data.add(new Item("Оплатил счет картой на корпоративе", 15467));
+//        data.add(new Item("Автомобиль", 1250000));
+//        data.add(new Item("CocaCola", 100));
+//        data.add(new Item("", 0));
+//        data.add(new Item("Холодильник", 32467));
+//        data.add(new Item("Печенюшки", 100));
+//        data.add(new Item("Новый SSD", 12000));
+//        data.add(new Item("Уже не помню что тогда покупал", 5858));
+//    }
 
     static class ItemViewHolder extends RecyclerView.ViewHolder {
 
@@ -68,9 +73,9 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
         }
 
         public void applyData(Item item) {
-            title.setText(item.getTitle());
+            title.setText(item.name);
             // Format string, like in android
-            price.setText(context.getString(R.string.item_list_price_formatter, item.getPrice()));
+            price.setText(context.getString(R.string.item_list_price_formatter, item.price));
         }
     }
 }
