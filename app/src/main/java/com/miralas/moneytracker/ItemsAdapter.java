@@ -44,6 +44,11 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
         return data.size();
     }
 
+    public void addItem(Item item) {
+        data.add(item);
+        notifyItemInserted(data.size());
+    }
+
 //    private void createData() {
 //        data.add(new Item("Молоко", 55));
 //        data.add(new Item("Сыр", 300));

@@ -1,7 +1,9 @@
 package com.miralas.moneytracker;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -21,9 +23,12 @@ public class AddItemActivity extends AppCompatActivity {
 
     private static final String TAG = "AddItemActivity";
 
+    public static final String TYPE_KEY = "type";
+
     private EditText name, price;
     private Button addBtn;
 
+    private String type;
     private Api api;
 
     // Text watcher for all fields on this activity
@@ -52,6 +57,13 @@ public class AddItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_additem);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.add_item_toolbar_title);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        type = getIntent().getStringExtra(TYPE_KEY);
+
         // Leave setTitle here, cause it's more universal solution
         setTitle(R.string.add_item_toolbar_title);
 
@@ -70,11 +82,19 @@ public class AddItemActivity extends AppCompatActivity {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                String itemName = name.getText().toString();
-//                String itemPrice = price.getText().toString();
-                Log.i(TAG, "onClick: add_btn");
+                String itemName = name.getText().toString();
+                int itemPrice = Integer.parseInt(price.getText().toString());
 
-                addItem(new Item("Test", 6700, Item.TYPE_EXPENSES));
+                Item item = new Item(itemName, itemPrice, type);
+
+                Intent intent = new Intent();
+                intent.putExtra("item", item);
+
+                // send post request to api(just for test)
+                addItem(item);
+
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
 
