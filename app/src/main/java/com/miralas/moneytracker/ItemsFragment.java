@@ -1,8 +1,13 @@
 package com.miralas.moneytracker;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,6 +28,8 @@ public class ItemsFragment extends Fragment {
 
     private static final String TYPE_KEY = "type";
 
+    private static final int ADD_ITEM_REQUEST_CODE = 123;
+
     public static ItemsFragment createItemsFragment(String type) {
         ItemsFragment fragment = new ItemsFragment();
 
@@ -37,6 +44,7 @@ public class ItemsFragment extends Fragment {
 
     private RecyclerView resycler;
     private ItemsAdapter adapter;
+    private SwipeRefreshLayout refresh;
 
     private Api api;
 
@@ -73,6 +81,14 @@ public class ItemsFragment extends Fragment {
                 (int) getResources().getDimension(R.dimen.item_margin_vertical)));
         resycler.setAdapter(adapter);
 
+        refresh = view.findViewById(R.id.refresh);
+        refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadData();
+            }
+        });
+
         loadData();
     }
 
@@ -83,13 +99,23 @@ public class ItemsFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Item>> call, Response<List<Item>> response) {
                 adapter.setData(response.body());
+                refresh.setRefreshing(false);
             }
 
             @Override
             public void onFailure(Call<List<Item>> call, Throwable t) {
-
+                refresh.setRefreshing(false);
             }
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == ADD_ITEM_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            Item item = data.getParcelableExtra("item");
+            adapter.addItem(item);
+        }
+
+        super.onActivityResult(requestCode,resultCode,data);
+    }
 }
