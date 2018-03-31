@@ -28,7 +28,7 @@ public class ItemsFragment extends Fragment {
 
     private static final String TYPE_KEY = "type";
 
-    private static final int ADD_ITEM_REQUEST_CODE = 123;
+    public static final int ADD_ITEM_REQUEST_CODE = 123;
 
     public static ItemsFragment createItemsFragment(String type) {
         ItemsFragment fragment = new ItemsFragment();
@@ -113,7 +113,9 @@ public class ItemsFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == ADD_ITEM_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             Item item = data.getParcelableExtra("item");
-            adapter.addItem(item);
+            if (item.type.equals(type)) {
+                adapter.addItem(item);
+            }
         }
 
         super.onActivityResult(requestCode,resultCode,data);
