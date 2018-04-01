@@ -2,6 +2,7 @@ package com.miralas.moneytracker;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,11 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
 
 
     private List<Item> data = new ArrayList<>();
+    private ItemsAdapterListener listener = null;
+
+    public void setListener(ItemsAdapterListener listener) {
+        this.listener = listener;
+    }
 
 //    public ItemsAdapter() {
 //        createData();
@@ -36,7 +42,7 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
     @Override
     public void onBindViewHolder(ItemsAdapter.ItemViewHolder holder, int position) {
         Item item = data.get(position);
-        holder.applyData(item);
+        holder.applyData(item, position, listener, selections.get(position, false));
     }
 
     @Override
@@ -49,20 +55,40 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
         notifyItemInserted(data.size());
     }
 
-//    private void createData() {
-//        data.add(new Item("Молоко", 55));
-//        data.add(new Item("Сыр", 300));
-//        data.add(new Item("Хлеб", 50));
-//        data.add(new Item("Шоколадка", 120));
-//        data.add(new Item("Оплатил счет картой на корпоративе", 15467));
-//        data.add(new Item("Автомобиль", 1250000));
-//        data.add(new Item("CocaCola", 100));
-//        data.add(new Item("", 0));
-//        data.add(new Item("Холодильник", 32467));
-//        data.add(new Item("Печенюшки", 100));
-//        data.add(new Item("Новый SSD", 12000));
-//        data.add(new Item("Уже не помню что тогда покупал", 5858));
-//    }
+    private SparseBooleanArray selections = new SparseBooleanArray();
+
+    public void toggleSelection(int position) {
+        if (selections.get(position, false)) {
+            selections.delete(position);
+        } else {
+            selections.put(position, true);
+        }
+        notifyItemChanged(position);
+    }
+
+    void clearSelections() {
+        selections.clear();
+        notifyDataSetChanged();
+    }
+
+    int getSelectedItemsCount() {
+        return selections.size();
+    }
+
+    List<Integer> getSelectedItems() {
+        List<Integer> items = new ArrayList<>(selections.size());
+        for (int i = 0; i < selections.size(); i ++) {
+            items.add(selections.keyAt(i));
+        }
+
+        return items;
+    }
+
+    Item remove(int pos) {
+        final Item item = data.remove(pos);
+        notifyItemRemoved(pos);
+        return item;
+    }
 
     static class ItemViewHolder extends RecyclerView.ViewHolder {
 
@@ -77,10 +103,31 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
             context = itemView.getContext();
         }
 
-        public void applyData(Item item) {
+        public void applyData(final Item item, final int position, final ItemsAdapterListener listener, boolean selected) {
             title.setText(item.name);
             // Format string, like in android
             price.setText(context.getString(R.string.item_list_price_formatter, item.price));
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.onItemClick(item, position);
+                    }
+                }
+            });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if (listener != null) {
+                        listener.onItemLongClick(item, position);
+                    }
+                    return true;
+                }
+            });
+
+            itemView.setActivated(selected);
         }
     }
 }
