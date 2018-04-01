@@ -77,7 +77,7 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
 
     List<Integer> getSelectedItems() {
         List<Integer> items = new ArrayList<>(selections.size());
-        for (int i = 0; i <= selections.size(); i ++) {
+        for (int i = 0; i < selections.size(); i ++) {
             items.add(selections.keyAt(i));
         }
 

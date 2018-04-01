@@ -2,9 +2,12 @@ package com.miralas.moneytracker;
 
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -25,7 +28,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by tiburon on 23/03/2018.
@@ -134,6 +136,13 @@ public class ItemsFragment extends Fragment {
 
     private ActionMode actionMode = null;
 
+    private void removeSelectedItems() {
+        for (int i = adapter.getSelectedItems().size() - 1; i >= 0; i--) {
+            adapter.remove(adapter.getSelectedItems().get(i));
+        }
+        actionMode.finish();
+    }
+
     private class AdapterListener implements ItemsAdapterListener {
 
         @Override
@@ -160,16 +169,11 @@ public class ItemsFragment extends Fragment {
         private boolean isInActionMode() {
             return actionMode != null;
         }
-    }
 
-    private void removeSelectedItems() {
-        for (int i=adapter.getSelectedItems().size() - 1; i >= 0; i--) {
-            adapter.remove(adapter.getSelectedItems().get(i));
-        }
-        actionMode.finish();
     }
 
     private ActionMode.Callback actionModeCallback = new ActionMode.Callback() {
+
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             MenuInflater inflater = new MenuInflater(getContext());
@@ -204,5 +208,18 @@ public class ItemsFragment extends Fragment {
     private void showDialog() {
         ConfirmationDialog dialog = new ConfirmationDialog();
         dialog.show(getFragmentManager(), "ConfirmationDialog");
+        dialog.setListener(new ConfirmationDialogListener() {
+            @Override
+            public void onPositiveBtnClick() {
+                removeSelectedItems();
+            }
+
+
+            @Override
+            public void onNegativeBtnClick() {
+                actionMode.finish();
+            }
+
+        });
     }
 }
