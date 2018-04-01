@@ -210,13 +210,13 @@ public class ItemsFragment extends Fragment {
         dialog.show(getFragmentManager(), "ConfirmationDialog");
         dialog.setListener(new ConfirmationDialogListener() {
             @Override
-            public void onPositiveBtnClick() {
+            public void onPositiveButtonClick() {
                 removeSelectedItems();
             }
 
 
             @Override
-            public void onNegativeBtnClick() {
+            public void onNegativeButtonClick() {
                 actionMode.finish();
             }
 

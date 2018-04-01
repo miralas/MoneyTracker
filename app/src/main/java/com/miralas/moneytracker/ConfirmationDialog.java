@@ -29,8 +29,8 @@ public class ConfirmationDialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Add listeners like in ItemsAdapter
         AlertDialog dialog = new AlertDialog.Builder(getContext())
-                .setTitle(R.string.app_name)
-                .setMessage("Вы уверены?")
+                .setTitle(R.string.dialog_title)
+                .setMessage(R.string.dialog_question)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

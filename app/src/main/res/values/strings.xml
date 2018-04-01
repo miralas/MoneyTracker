@@ -18,5 +18,8 @@
         <item>@string/tab_balance</item>
     </string-array>
 
+    <string name="dialog_title">Удаление</string>
+    <string name="dialog_question">Вы уверены?</string>
+
     <string name="balance_dummy">Тут будет фрагмент "Баланс", а пока его нет, смотреть тут не на что.</string>
 </resources>
