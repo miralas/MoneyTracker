@@ -104,7 +104,7 @@ public class AddItemActivity extends AppCompatActivity {
     }
 
     private void addItem(Item item, String token, final Intent intent) {
-        Call<AddItemResult> call = api.addItem(item.price, item.name, type, token);
+        Call<AddItemResult> call = api.addItem(item.price, item.name, type);
 
         call.enqueue(new Callback<AddItemResult>() {
             @Override

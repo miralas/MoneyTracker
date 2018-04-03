@@ -26,4 +26,8 @@
     <string name="google_auth_failure">Авторизация через Google провалена</string>
     <string name="slogan">Ваш незаменимый помощник в управлении бюджетом</string>
     <string name="success_msg">success</string>
+
+    <string name="your_balance">ваш баланс</string>
+    <string name="expense_title">расход</string>
+    <string name="income_title">доход</string>
 </resources>

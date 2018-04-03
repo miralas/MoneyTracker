@@ -26,4 +26,8 @@
     <string name="google_auth_failure">Auth via Google failed</string>
     <string name="slogan">Your irreplaceable assistant in budget management</string>
     <string name="success_msg">success</string>
+
+    <string name="your_balance">your balance</string>
+    <string name="expense_title">expenses</string>
+    <string name="income_title">incomes</string>
 </resources>

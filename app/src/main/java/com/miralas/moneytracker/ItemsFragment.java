@@ -107,7 +107,7 @@ public class ItemsFragment extends Fragment {
     }
 
     private void loadData() {
-        Call<List<Item>> call = api.getItems(type, app.getAuthToken());
+        Call<List<Item>> call = api.getItems(type);
 
         call.enqueue(new Callback<List<Item>>() {
             @Override

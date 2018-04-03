@@ -21,4 +21,11 @@
     <dimen name="zero_margin">0dp</dimen>
     <dimen name="intro_margin_top">25dp</dimen>
     <dimen name="slogan_size">14.1sp</dimen>
+
+    // Balance fragment
+    <dimen name="total_balance_text_size">50sp</dimen>
+    <dimen name="balance_header_size">20sp</dimen>
+    <dimen name="total_balance_title_text_size">20sp</dimen>
+    <dimen name="balance_summ_size">24sp</dimen>
+    <dimen name="balance_secondary_text_size">12sp</dimen>
 </resources>

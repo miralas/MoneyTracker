@@ -11,4 +11,9 @@
     <color name="colorItemSelected">#985305</color>
     <color name="tabIndicator">#ffff00</color>
     <color name="tabInactiveFontColor">#a6ffffff</color>
+
+    <color name="balance_total_color">#3ab7ae</color>
+    <color name="balanse_expense_color">#f76c41</color>
+    <color name="balance_income_color">#fcc31e</color>
+    <color name="balance_secondary_text_color">#95989a</color>
 </resources>
