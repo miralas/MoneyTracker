@@ -11,4 +11,14 @@
     // For tabs
     <dimen name="tabIndicatorHeight">1dp</dimen>
     <dimen name="tabFontSize">14sp</dimen>
+
+    // Auth page
+    <dimen name="default_constraint_margin">8dp</dimen>
+    <dimen name="logo_margin_top">40dp</dimen>
+    <dimen name="slogan_width">200dp</dimen>
+    <dimen name="slogan_margin_top">22dp</dimen>
+    <dimen name="sign_in_button_margin_top">36dp</dimen>
+    <dimen name="zero_margin">0dp</dimen>
+    <dimen name="intro_margin_top">25dp</dimen>
+    <dimen name="slogan_size">14.1sp</dimen>
 </resources>
