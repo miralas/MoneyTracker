@@ -90,6 +90,10 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
         return item;
     }
 
+    public List<Item> getData() {
+        return data;
+    }
+
     static class ItemViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView title;

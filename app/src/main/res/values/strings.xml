@@ -22,4 +22,8 @@
     <string name="dialog_question">Вы уверены?</string>
 
     <string name="balance_dummy">Тут будет фрагмент "Баланс", а пока его нет, смотреть тут не на что.</string>
+    <string name="app_auth_failure">Авторизация отклонена</string>
+    <string name="google_auth_failure">Авторизация через Google провалена</string>
+    <string name="slogan">Ваш незаменимый помощник в управлении бюджетом</string>
+    <string name="success_msg">success</string>
 </resources>

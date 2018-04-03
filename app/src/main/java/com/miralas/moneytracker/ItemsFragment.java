@@ -1,20 +1,15 @@
 package com.miralas.moneytracker;
 
 import android.app.Activity;
-import android.app.DialogFragment;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,11 +17,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.miralas.moneytracker.api.AddItemResult;
+import com.miralas.moneytracker.api.Api;
+import com.miralas.moneytracker.api.RemoveItemResult;
+
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.app.Activity.RESULT_CANCELED;
 
 
 /**
@@ -56,6 +57,7 @@ public class ItemsFragment extends Fragment {
     private SwipeRefreshLayout refresh;
 
     private Api api;
+    private App app;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,7 +73,8 @@ public class ItemsFragment extends Fragment {
             throw new IllegalArgumentException("Unknown type");
         }
 
-        api = ((App)getActivity().getApplication()).getApi();
+        app = (App) getActivity().getApplication();
+        api = app.getApi();
     }
 
     @Nullable
@@ -104,7 +107,7 @@ public class ItemsFragment extends Fragment {
     }
 
     private void loadData() {
-        Call<List<Item>> call = api.getItems(type);
+        Call<List<Item>> call = api.getItems(type, app.getAuthToken());
 
         call.enqueue(new Callback<List<Item>>() {
             @Override
@@ -119,6 +122,7 @@ public class ItemsFragment extends Fragment {
             }
         });
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -138,7 +142,24 @@ public class ItemsFragment extends Fragment {
 
     private void removeSelectedItems() {
         for (int i = adapter.getSelectedItems().size() - 1; i >= 0; i--) {
-            adapter.remove(adapter.getSelectedItems().get(i));
+            final int position = i;
+            Item item = adapter.getData().get(i);
+            Call<RemoveItemResult> call = api.removeItem(item.id);
+            call.enqueue(new Callback<RemoveItemResult>() {
+                @Override
+                public void onResponse(Call<RemoveItemResult> call, Response<RemoveItemResult> response) {
+                    RemoveItemResult result = response.body();
+                    if (result.status.equals(getString(R.string.success_msg))) {
+                        adapter.remove(position);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<RemoveItemResult> call, Throwable t) {
+
+                }
+            });
+
         }
         actionMode.finish();
     }

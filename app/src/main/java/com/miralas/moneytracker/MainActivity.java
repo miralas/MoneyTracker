@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
@@ -67,6 +68,22 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (((App) getApplication()).isAuthorized()) {
+            initUi();
+        } else {
+            Intent intent = new Intent(this, AuthActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    private void initUi() {
+        MainPagesAdapter adapter = new MainPagesAdapter(getSupportFragmentManager(), this);
+        viewPager.setAdapter(adapter);
+    }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -95,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
             case ViewPager.SCROLL_STATE_DRAGGING:
             case ViewPager.SCROLL_STATE_SETTLING:
                 // Finish actionMode when start scrolling pages
+                Log.i(TAG, "onPageScrollStateChanged: " + actionMode);
                 if (actionMode != null) {
                     actionMode.finish();
                 }
@@ -118,11 +136,13 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     public void onSupportActionModeStarted(@NonNull ActionMode mode) {
         super.onSupportActionModeStarted(mode);
         fab.hide();
+        actionMode = mode;
     }
 
     @Override
     public void onSupportActionModeFinished(@NonNull ActionMode mode) {
         super.onSupportActionModeFinished(mode);
         fab.show();
+        actionMode = null;
     }
 }
