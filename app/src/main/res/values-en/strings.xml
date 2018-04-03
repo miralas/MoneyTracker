@@ -25,4 +25,5 @@
     <string name="app_auth_failure">Auth failed</string>
     <string name="google_auth_failure">Auth via Google failed</string>
     <string name="slogan">Your irreplaceable assistant in budget management</string>
+    <string name="success_msg">success</string>
 </resources>

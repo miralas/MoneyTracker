@@ -17,13 +17,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.miralas.moneytracker.api.AddItemResult;
 import com.miralas.moneytracker.api.Api;
+import com.miralas.moneytracker.api.RemoveItemResult;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.app.Activity.RESULT_CANCELED;
 
 
 /**
@@ -138,7 +142,24 @@ public class ItemsFragment extends Fragment {
 
     private void removeSelectedItems() {
         for (int i = adapter.getSelectedItems().size() - 1; i >= 0; i--) {
-            adapter.remove(adapter.getSelectedItems().get(i));
+            final int position = i;
+            Item item = adapter.getData().get(i);
+            Call<RemoveItemResult> call = api.removeItem(item.id);
+            call.enqueue(new Callback<RemoveItemResult>() {
+                @Override
+                public void onResponse(Call<RemoveItemResult> call, Response<RemoveItemResult> response) {
+                    RemoveItemResult result = response.body();
+                    if (result.status.equals(getString(R.string.success_msg))) {
+                        adapter.remove(position);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<RemoveItemResult> call, Throwable t) {
+
+                }
+            });
+
         }
         actionMode.finish();
     }

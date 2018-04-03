@@ -110,7 +110,7 @@ public class AddItemActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<AddItemResult> call, Response<AddItemResult> response) {
                 AddItemResult result = response.body();
-                if (result.status.equals("success")) {
+                if (result.status.equals(getString(R.string.success_msg))) {
                     setResult(RESULT_OK, intent);
                 } else {
                     setResult(RESULT_CANCELED, intent);
@@ -119,7 +119,7 @@ public class AddItemActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<AddItemResult> call, Throwable t) {
-
+                setResult(RESULT_CANCELED, intent);
             }
         });
     }

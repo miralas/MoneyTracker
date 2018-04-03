@@ -25,4 +25,5 @@
     <string name="app_auth_failure">Авторизация отклонена</string>
     <string name="google_auth_failure">Авторизация через Google провалена</string>
     <string name="slogan">Ваш незаменимый помощник в управлении бюджетом</string>
+    <string name="success_msg">success</string>
 </resources>

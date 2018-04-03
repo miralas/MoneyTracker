@@ -25,4 +25,7 @@ public interface Api {
     @POST("items/add")
     Call<AddItemResult> addItem(@Query("price") int price, @Query("name") String name, @Query("type") String type, @Query("auth-token") String token );
 
+    @POST("items/remove")
+    Call<RemoveItemResult> removeItem(@Query("id") int id);
+
 }
