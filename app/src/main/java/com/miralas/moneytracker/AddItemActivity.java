@@ -8,12 +8,13 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 
-import java.util.List;
+import com.miralas.moneytracker.api.AddItemResult;
+import com.miralas.moneytracker.api.Api;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,6 +31,7 @@ public class AddItemActivity extends AppCompatActivity {
 
     private String type;
     private Api api;
+    private App app;
 
     // Text watcher for all fields on this activity
     private TextWatcher addItemTextWatcher = new TextWatcher() {
@@ -75,7 +77,8 @@ public class AddItemActivity extends AppCompatActivity {
         name.addTextChangedListener(addItemTextWatcher);
         price.addTextChangedListener(addItemTextWatcher);
 
-        api = ((App)getApplication()).getApi();
+        app = (App)getApplication();
+        api = app.getApi();
 
 
         // Add on click listener to add_btn
@@ -91,7 +94,7 @@ public class AddItemActivity extends AppCompatActivity {
                 intent.putExtra("item", item);
 
                 // send post request to api(just for test)
-                addItem(item);
+                addItem(item, app.getAuthToken(), intent);
 
                 setResult(RESULT_OK, intent);
                 finish();
@@ -100,20 +103,34 @@ public class AddItemActivity extends AppCompatActivity {
 
     }
 
-    private void addItem(Item item) {
-        Call<String> call = api.addItem(item);
+    private void addItem(Item item, String token, final Intent intent) {
+        Call<AddItemResult> call = api.addItem(item.price, item.name, type, token);
 
-        call.enqueue(new Callback<String>() {
+        call.enqueue(new Callback<AddItemResult>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                Log.d(TAG, "onResponse: " + response.body());
+            public void onResponse(Call<AddItemResult> call, Response<AddItemResult> response) {
+                AddItemResult result = response.body();
+                if (result.status.equals("success")) {
+                    setResult(RESULT_OK, intent);
+                } else {
+                    setResult(RESULT_CANCELED, intent);
+                }
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<AddItemResult> call, Throwable t) {
 
             }
         });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }

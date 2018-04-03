@@ -1,26 +1,23 @@
 package com.miralas.moneytracker;
 
 import android.app.Activity;
-import android.app.DialogFragment;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.miralas.moneytracker.api.Api;
 
 import java.util.List;
 
@@ -56,6 +53,7 @@ public class ItemsFragment extends Fragment {
     private SwipeRefreshLayout refresh;
 
     private Api api;
+    private App app;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,7 +69,8 @@ public class ItemsFragment extends Fragment {
             throw new IllegalArgumentException("Unknown type");
         }
 
-        api = ((App)getActivity().getApplication()).getApi();
+        app = (App) getActivity().getApplication();
+        api = app.getApi();
     }
 
     @Nullable
@@ -104,7 +103,7 @@ public class ItemsFragment extends Fragment {
     }
 
     private void loadData() {
-        Call<List<Item>> call = api.getItems(type);
+        Call<List<Item>> call = api.getItems(type, app.getAuthToken());
 
         call.enqueue(new Callback<List<Item>>() {
             @Override
@@ -119,6 +118,7 @@ public class ItemsFragment extends Fragment {
             }
         });
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

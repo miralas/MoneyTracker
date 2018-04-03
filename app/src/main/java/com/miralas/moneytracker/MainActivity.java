@@ -68,6 +68,22 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (((App) getApplication()).isAuthorized()) {
+            initUi();
+        } else {
+            Intent intent = new Intent(this, AuthActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    private void initUi() {
+        MainPagesAdapter adapter = new MainPagesAdapter(getSupportFragmentManager(), this);
+        viewPager.setAdapter(adapter);
+    }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
