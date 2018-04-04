@@ -30,4 +30,5 @@
     <dimen name="balance_secondary_text_size">12sp</dimen>
     <dimen name="balace_padding">8dp</dimen>
     <dimen name="zero">0dp</dimen>
+    <dimen name="item_elevation">6dp</dimen>
 </resources>
