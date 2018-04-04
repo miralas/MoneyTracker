@@ -5,7 +5,7 @@
     <dimen name="item_padding">18dp</dimen>
 
     // For Items Recycler View
-    <dimen name="item_margin_vertical">6dp</dimen>
+    <dimen name="item_margin_vertical">4dp</dimen>
     <dimen name="item_margin_horizontal">8dp</dimen>
 
     // For tabs
@@ -29,4 +29,5 @@
     <dimen name="balance_summ_size">24sp</dimen>
     <dimen name="balance_secondary_text_size">12sp</dimen>
     <dimen name="balace_padding">8dp</dimen>
+    <dimen name="zero">0dp</dimen>
 </resources>
