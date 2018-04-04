@@ -20,12 +20,15 @@ public interface Api {
     Call<AuthResult> auth(@Query("social_user_id") String userId);
 
     @GET("items")
-    Call<List<Item>> getItems(@Query("type") String type, @Query("auth-token") String token);
+    Call<List<Item>> getItems(@Query("type") String type);
 
     @POST("items/add")
-    Call<AddItemResult> addItem(@Query("price") int price, @Query("name") String name, @Query("type") String type, @Query("auth-token") String token );
+    Call<AddItemResult> addItem(@Query("price") int price, @Query("name") String name, @Query("type") String type);
 
     @POST("items/remove")
     Call<RemoveItemResult> removeItem(@Query("id") int id);
+
+    @GET("balance")
+    Call<BalanceResult> balance();
 
 }

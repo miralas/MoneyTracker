@@ -3,10 +3,14 @@
     <dimen name="font_size">20sp</dimen>
     <dimen name="item_add_btn_size">26dp</dimen>
     <dimen name="item_padding">18dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
 
     // For Items Recycler View
-    <dimen name="item_margin_vertical">6dp</dimen>
+    <dimen name="item_margin_vertical">4dp</dimen>
     <dimen name="item_margin_horizontal">8dp</dimen>
+    <dimen name="item_elevation">6dp</dimen>
+
 
     // For tabs
     <dimen name="tabIndicatorHeight">1dp</dimen>
@@ -21,4 +25,22 @@
     <dimen name="zero_margin">0dp</dimen>
     <dimen name="intro_margin_top">25dp</dimen>
     <dimen name="slogan_size">14.1sp</dimen>
+
+    // Balance fragment
+    <dimen name="total_balance_text_size">50sp</dimen>
+    <dimen name="balance_header_size">20sp</dimen>
+    <dimen name="total_balance_title_text_size">20sp</dimen>
+    <dimen name="balance_summ_size">24sp</dimen>
+    <dimen name="balance_secondary_text_size">12sp</dimen>
+    <dimen name="balace_padding">8dp</dimen>
+    <dimen name="zero">0dp</dimen>
+
+    // Add Item
+    <dimen name="add_item_elevation">6dp</dimen>
+    <dimen name="add_item_height">68dp</dimen>
+    <dimen name="add_item_padding_horizontal">22dp</dimen>
+    <dimen name="add_item_button_margin">22dp</dimen>
+    <dimen name="rub_symbol_width">16dp</dimen>
+    <dimen name="rub_margin">2dp</dimen>
+    <dimen name="prices_margin_top">40dp</dimen>
 </resources>
